@@ -31,7 +31,11 @@ class AmadeusClient:
     
     async def search_flights(self, origin: str, destination: str, departure_date: str = None):
         """Search for flights using Amadeus API"""
-                
+
+        # Convert airport codes to uppercase to make Amadeus happy
+        origin = origin.upper()
+        destination = destination.upper()
+
         # Get access token if we don't have one
         if not self.access_token:
             if not await self.get_access_token():
